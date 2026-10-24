@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam JS Roaya Academy</title>
+<style>
+:root{--navy:#14213d;--blue:#2563eb;--cyan:#06b6d4;--bg:#f3f6fb;--ink:#172033;--muted:#667085;--line:#dce3ee;--green:#15803d}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(135deg,var(--navy),#244c8a);color:white;padding:30px 18px;text-align:center}
+header h1{margin:0;font-size:clamp(1.7rem,4vw,2.5rem);letter-spacing:.3px}
+header p{margin:8px 0 0;color:#e0ecff}
+.container{max-width:950px;margin:24px auto;padding:0 14px 40px}
+.panel,.question{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 5px 18px #14213d0a}
+.panel h2{margin-top:0}
+.details{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+label{font-weight:600}
+input[type=text]{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;margin-top:6px;font:inherit}
+.progress-wrap{height:9px;background:#e5eaf2;border-radius:20px;overflow:hidden;margin:14px 0 6px}
+#progress{height:100%;width:0;background:var(--cyan);transition:width .2s}
+.question h3{font-size:1.06rem;margin:0 0 4px}
+.translation{color:var(--muted);margin:0 0 13px}
+.qnum{color:var(--blue);font-weight:700;font-size:.9rem;margin-bottom:5px}
+.options{display:grid;gap:8px}
+.option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);padding:10px 12px;border-radius:9px;cursor:pointer}
+.option:hover{border-color:var(--blue);background:#f8fbff}
+.option input{margin-top:5px;accent-color:var(--blue)}
+textarea{width:100%;min-height:145px;resize:vertical;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font:14px/1.5 Consolas,monospace}
+.hint{font-size:.92rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+button{border:0;border-radius:9px;padding:12px 18px;font-weight:700;font-size:1rem;cursor:pointer}
+.primary{background:var(--blue);color:white}.secondary{background:#e2e8f0;color:var(--ink)}
+#result{display:none}.score{font-size:1.5rem;font-weight:800;color:var(--green)}
+.review-item{padding:10px 0;border-top:1px solid var(--line)}
+.correct{color:var(--green);font-weight:700}.wrong{color:#b42318;font-weight:700}
+footer{text-align:center;color:var(--muted);padding:10px 0 30px}
+@media(max-width:600px){.panel,.question{padding:15px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Exam JS Roaya Academy</h1>
+  <p>JavaScript Basics Exam | امتحان أساسيات جافاسكريبت</p>
+</header>
+<main class="container">
+  <section class="panel">
+    <h2>Student Information | بيانات الطالب</h2>
+    <div class="details">
+      <label>Student Name | اسم الطالب
+        <input type="text" id="studentName" placeholder="Write your name / اكتب اسمك">
+      </label>
+      <label>Group | المجموعة
+        <input type="text" id="studentGroup" placeholder="Group / المجموعة">
+      </label>
+    </div>
+    <p><strong>Instructions | التعليمات:</strong> Choose one answer for each question. يوجد 30 سؤال اختيار من متعدد، وفي النهاية سؤالان لكتابة الكود.</p>
+    <p class="hint">MCQ: 30 points. Coding questions are reviewed by the instructor. | الاختيار من متعدد: 30 درجة، وسؤالا الكود يراجعهما المدرّس.</p>
+    <div class="progress-wrap"><div id="progress"></div></div>
+    <div class="hint" id="progressText">0 of 30 answered | تمت الإجابة عن 0 من 30</div>
+  </section>
+
+  <form id="examForm">
+    <div id="questions"></div>
+    <section class="question">
+      <div class="qnum">Question 31 | السؤال 31 — Coding</div>
+      <h3>Temperature Checker | فحص درجة الحرارة</h3>
+      <p>Write JavaScript code that stores a temperature in a variable and uses <code>if / else if / else</code> to print:</p>
+      <p dir="rtl">اكتب كود JavaScript يخزن درجة الحرارة في متغير ويستخدم <code>if / else if / else</code> لطباعة:</p>
+      <ul>
+        <li>More than 30: "Hot" | أكبر من 30: "Hot"</li>
+        <li>From 20 to 30 (inclusive): "Warm" | من 20 إلى 30 شاملًا: "Warm"</li>
+        <li>Less than 20: "Cold" | أقل من 20: "Cold"</li>
+      </ul>
+      <textarea id="code1" placeholder="let temperature = 25;
+// Write your code here..."></textarea>
+    </section>
+    <section class="question">
+      <div class="qnum">Question 32 | السؤال 32 — Coding</div>
+      <h3>Count by 5 | العد بزيادة 5</h3>
+      <p>Write a <code>for</code> loop that prints numbers from 5 to 100, increasing by 5 each time.</p>
+      <p dir="rtl">اكتب حلقة <code>for</code> تطبع الأرقام من 5 إلى 100، مع زيادة 5 في كل مرة.</p>
+      <textarea id="code2" placeholder="for (let i = ...; ...; ...) {
+// Write your code here...
+}"></textarea>
+    </section>
+    <div class="actions">
+      <button class="primary" type="button" id="submitBtn">Submit Exam | تسليم الامتحان</button>
+      <button class="secondary" type="button" id="resetBtn">Reset | إعادة الامتحان</button>
+    </div>
+  </form>
+  <section class="panel" id="result" aria-live="polite">
+    <h2>Exam Result | النتيجة</h2>
+    <p id="studentResult"></p>
+    <p class="score" id="score"></p>
+    <p id="unanswered"></p>
+    <h3>Answer Review | مراجعة الإجابات</h3>
+    <div id="review"></div>
+    <p class="hint">The coding answers are saved in the page for instructor review, but are not automatically graded. | إجابات الكود لا يتم تصحيحها تلقائيًا، وتحتاج إلى مراجعة المدرّس.</p>
+    <button class="secondary" type="button" onclick="window.print()">Print Result | طباعة النتيجة</button>
+  </section>
+</main>
+<footer>Roaya Academy — We think, we code, we build.</footer>
+<script>
+const quiz = [
+ {q:"Which keyword declares a variable that can be reassigned?",ar:"ما الكلمة التي تُستخدم لتعريف متغير يمكن تغيير قيمته؟",o:["const","let","function","class"],a:1,e:"let"},
+ {q:"What is the value of x after this code?",ar:"ما قيمة x بعد تنفيذ الكود؟",code:"let x = 4; x = 7;",o:["4","7","11","undefined"],a:1,e:"The second assignment changes x to 7."},
+ {q:"Which keyword declares a variable that should not be reassigned?",ar:"ما الكلمة المستخدمة لتعريف متغير لا نريد إعادة إسناد قيمة له؟",o:["let","var","const","if"],a:2,e:"const"},
+ {q:"What does this code print?",ar:"ماذا يطبع هذا الكود؟",code:"let age = 12;\\nconsole.log(age);",o:["12","age","\"age\"","Error"],a:0,e:"It prints the value stored in age: 12."},
+ {q:"Which symbol checks equality of both value and type?",ar:"أي رمز يفحص تساوي القيمة ونوع البيانات معًا؟",o:["=","==","===","!="],a:2,e:"==="},
+ {q:"What is the purpose of an if statement?",ar:"ما وظيفة جملة if؟",o:["Repeat code forever","Make a decision based on a condition","Create an array","Declare a class"],a:1,e:"if runs a block when its condition is true."},
+ {q:"What is printed?",ar:"ماذا تتم طباعته؟",code:"if (5 > 2) {\\n console.log(\"Yes\");\\n}",o:["No","Yes","5 > 2","Nothing"],a:1,e:"5 > 2 is true, so Yes is printed."},
+ {q:"Which keyword gives an alternative when the if condition is false?",ar:"ما الكلمة التي تحدد بديلًا عندما يكون شرط if غير صحيح؟",o:["for","else","let","return"],a:1,e:"else"},
+ {q:"What is printed?",ar:"ماذا تتم طباعته؟",code:"let n = 3;\\nif (n > 5) console.log(\"A\");\\nelse console.log(\"B\");",o:["A","B","A and B","Nothing"],a:1,e:"n > 5 is false, so B is printed."},
+ {q:"Which operator means logical AND?",ar:"أي عامل يعني AND المنطقية؟",o:["||","!","&&","%"],a:2,e:"&&"},
+ {q:"How many times does this loop run?",ar:"كم مرة تعمل هذه الحلقة؟",code:"for (let i = 0; i < 4; i++) {}",o:["3","4","5","0"],a:1,e:"i takes the values 0, 1, 2, 3: four iterations."},
+ {q:"Which part increases i in this loop?",ar:"أي جزء يزيد قيمة i في هذه الحلقة؟",code:"for (let i = 1; i <= 5; i++) {}",o:["let i = 1","i <= 5","i++","for"],a:2,e:"i++ increases i by one."},
+ {q:"What numbers are printed?",ar:"ما الأرقام التي تتم طباعتها؟",code:"for (let i = 1; i <= 3; i++) console.log(i);",o:["0, 1, 2","1, 2, 3","1, 2, 3, 4","3 only"],a:1,e:"The loop includes 1, 2, and 3."},
+ {q:"Which loop is commonly used when you know how many times to repeat?",ar:"أي حلقة تُستخدم غالبًا عندما تعرف عدد مرات التكرار؟",o:["if","for","class","const"],a:1,e:"for"},
+ {q:"What does i += 2 do?",ar:"ماذا تفعل العبارة i += 2؟",o:["Sets i to 2 only","Adds 2 to i","Multiplies i by 2","Subtracts 2 from i"],a:1,e:"It is shorthand for i = i + 2."},
+ {q:"How do you declare a function named greet?",ar:"كيف تعرّف دالة اسمها greet؟",o:["function greet() {}","def greet() {}","func = greet {}","new greet()"],a:0,e:"function greet() {}"},
+ {q:"How do you call the function greet?",ar:"كيف تستدعي الدالة greet؟",o:["call greet","greet()","function(greet)","run = greet"],a:1,e:"Use the function name followed by parentheses."},
+ {q:"What does return do in a function?",ar:"ما وظيفة return داخل الدالة؟",o:["Repeats the function","Sends a value back and ends that function call","Creates a loop","Prints automatically"],a:1,e:"return sends a result back to the caller."},
+ {q:"What is the output?",ar:"ما الناتج؟",code:"function add(a, b) { return a + b; }\\nconsole.log(add(2, 3));",o:["23","5","2","undefined"],a:1,e:"2 + 3 = 5."},
+ {q:"In a function, what are a and b in add(a, b)?",ar:"في الدالة add(a, b)، ماذا يمثل a و b؟",o:["Parameters","Classes","Loops","Array indexes"],a:0,e:"They are parameters that receive values."},
+ {q:"Which brackets are used to create an array?",ar:"أي أقواس تُستخدم لإنشاء Array؟",o:["{}","()","[]","<>"],a:2,e:"Square brackets []"},
+ {q:"What is the first index of a JavaScript array?",ar:"ما رقم الفهرس لأول عنصر في Array في JavaScript؟",o:["1","0","-1","It has no index"],a:1,e:"Array indexes start at 0."},
+ {q:"What is fruits[1]?",ar:"ما قيمة fruits[1]؟",code:"let fruits = [\"Apple\", \"Mango\", \"Banana\"];",o:["Apple","Mango","Banana","1"],a:1,e:"Index 1 is the second item: Mango."},
+ {q:"Which property gives the number of items in an array?",ar:"أي خاصية تعطي عدد العناصر في Array؟",o:["size","count","length","items"],a:2,e:"array.length"},
+ {q:"Which method adds an item to the end of an array?",ar:"أي دالة تضيف عنصرًا إلى نهاية Array؟",o:["push()","pop()","shift()","join()"],a:0,e:"push() adds an item at the end."},
+ {q:"What does pop() do to an array?",ar:"ماذا تفعل pop() مع Array؟",o:["Adds an item at the start","Removes the last item","Sorts all items","Counts items"],a:1,e:"pop() removes and returns the last item."},
+ {q:"What is a class used for in basic JavaScript?",ar:"في أساسيات JavaScript، ما الاستخدام البسيط للـ class؟",o:["To create a template for objects","To repeat a loop","To store only numbers","To compare two values"],a:0,e:"A class is a template for creating objects."},
+ {q:"Which keyword starts a class declaration?",ar:"ما الكلمة التي تبدأ تعريف class؟",o:["object","make","class","template"],a:2,e:"class"},
+ {q:"Which code correctly creates an object from a class named Student?",ar:"أي كود ينشئ object من class اسمها Student بطريقة صحيحة؟",o:["Student = new;","new Student()","class Student","Student() = new"],a:1,e:"Use new Student() to create an instance."},
+ {q:"In this simple class, what is name?",ar:"في هذا الـ class البسيط، ما الذي يمثله name؟",code:"class Student {\\n constructor(name) { this.name = name; }\\n}",o:["A loop","A property stored on the object","An if condition","An array method"],a:1,e:"this.name is an object property."}
+];
+const questionsEl = document.getElementById("questions");
+quiz.forEach((item,i)=>{
+ const section=document.createElement("section"); section.className="question"; section.id="q"+i;
+ let html=`<div class="qnum">Question ${i+1} of 30 | السؤال ${i+1} من 30</div><h3>${item.q}</h3><p class="translation" dir="rtl">${item.ar}</p>`;
+ if(item.code) html+=`<pre style="background:#f3f6fb;padding:10px;border-radius:8px;overflow:auto"><code>${item.code.replaceAll("\\n","\n")}</code></pre>`;
+ html+='<div class="options">';
+ item.o.forEach((opt,j)=>{html+=`<label class="option"><input type="radio" name="q${i}" value="${j}"><span>${String.fromCharCode(65+j)}. ${opt}</span></label>`});
+ html+='</div>'; section.innerHTML=html; questionsEl.appendChild(section);
+});
+const form=document.getElementById("examForm");
+function updateProgress(){
+ const count=quiz.filter((_,i)=>form.querySelector(`input[name="q${i}"]:checked`)).length;
+ document.getElementById("progress").style.width=(count/quiz.length*100)+"%";
+ document.getElementById("progressText").textContent=`${count} of 30 answered | تمت الإجابة عن ${count} من 30`;
+}
+form.addEventListener("change",updateProgress);
+document.getElementById("submitBtn").addEventListener("click",()=>{
+ let score=0, unanswered=0, review="";
+ quiz.forEach((item,i)=>{
+   const selected=form.querySelector(`input[name="q${i}"]:checked`);
+   if(!selected) unanswered++;
+   const ok=selected && Number(selected.value)===item.a;
+   if(ok) score++;
+   const your=selected?item.o[Number(selected.value)]:"Not answered / بدون إجابة";
+   review+=`<div class="review-item"><strong>${i+1}. ${item.q}</strong><br><span class="${ok?'correct':'wrong'}">${ok?'Correct ✓':'Incorrect ✗'}</span> — Your answer: ${your}<br><span class="correct">Correct answer: ${item.o[item.a]}</span><br><span class="hint">${item.e}</span></div>`;
+ });
+ document.getElementById("studentResult").textContent="Student: "+(document.getElementById("studentName").value.trim()||"Not entered")+" | Group: "+(document.getElementById("studentGroup").value.trim()||"Not entered");
+ document.getElementById("score").textContent=`MCQ Score: ${score} / 30 (${Math.round(score/30*100)}%)`;
+ document.getElementById("unanswered").textContent=`Unanswered MCQs: ${unanswered} | أسئلة الاختيار من متعدد غير المجابة: ${unanswered}`;
+ document.getElementById("review").innerHTML=review;
+ document.getElementById("result").style.display="block";
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{
+ if(confirm("Reset all answers? هل تريد إعادة الامتحان من البداية؟")){
+   form.reset(); document.getElementById("result").style.display="none"; updateProgress(); window.scrollTo({top:0,behavior:"smooth"});
+ }
+});
+</script>
+</body>
+</html>
